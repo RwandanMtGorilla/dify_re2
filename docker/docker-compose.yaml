@@ -372,7 +372,7 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:1.15.0
+    image: dify-web:1.15.0-deepseek
     restart: always
     env_file:
       - path: ./envs/core-services/web.env
