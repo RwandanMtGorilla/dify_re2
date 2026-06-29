@@ -14,7 +14,7 @@ import { consoleQuery } from '@/service/client'
 import { login } from '@/service/common'
 import { setWebAppAccessToken } from '@/service/webapp-auth'
 import { encryptPassword } from '@/utils/encryption'
-import { resolvePostLoginRedirect } from '../utils/post-login-redirect'
+import { DEFAULT_POST_LOGIN_REDIRECT, resolvePostLoginRedirect } from '../utils/post-login-redirect'
 
 type MailAndPasswordAuthProps = {
   isInvite: boolean
@@ -93,7 +93,7 @@ export default function MailAndPasswordAuth({ isInvite, isEmailSetup }: MailAndP
         else {
           await queryClient.resetQueries({ queryKey: consoleQuery.account.profile.get.key() })
           const redirectUrl = resolvePostLoginRedirect(searchParams)
-          router.replace(redirectUrl || '/')
+          router.replace(redirectUrl || DEFAULT_POST_LOGIN_REDIRECT)
         }
       }
       else {

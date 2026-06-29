@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { resolvePostLoginRedirect, setPostLoginRedirect } from '../post-login-redirect'
+import { DEFAULT_POST_LOGIN_REDIRECT, resolvePostLoginRedirect, setPostLoginRedirect } from '../post-login-redirect'
 
 describe('post-login redirect utilities', () => {
   beforeEach(() => {
@@ -14,6 +14,10 @@ describe('post-login redirect utilities', () => {
     })
 
     expect(resolvePostLoginRedirect(searchParams as unknown as Parameters<typeof resolvePostLoginRedirect>[0])).toBe('/account/oauth/authorize?client_id=app&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback')
+  })
+
+  it('should expose the default post-login redirect target', () => {
+    expect(DEFAULT_POST_LOGIN_REDIRECT).toBe('/chat/DeepSeek')
   })
 
   it('should recover a valid device redirect from sessionStorage once', () => {

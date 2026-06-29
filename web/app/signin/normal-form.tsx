@@ -17,7 +17,7 @@ import MailAndPasswordAuth from './components/mail-and-password-auth'
 import SocialAuth from './components/social-auth'
 import SSOAuth from './components/sso-auth'
 import Split from './split'
-import { resolvePostLoginRedirect } from './utils/post-login-redirect'
+import { DEFAULT_POST_LOGIN_REDIRECT, resolvePostLoginRedirect } from './utils/post-login-redirect'
 
 type AuthType = 'code' | 'password'
 
@@ -80,7 +80,7 @@ function NormalForm() {
     }
 
     const redirectUrl = resolvePostLoginRedirect(searchParams)
-    router.replace(redirectUrl || '/')
+    router.replace(redirectUrl || DEFAULT_POST_LOGIN_REDIRECT)
   }, [isInviteLink, isLoggedIn, router, searchParams])
 
   useEffect(() => {

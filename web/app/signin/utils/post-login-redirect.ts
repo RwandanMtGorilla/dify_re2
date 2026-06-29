@@ -3,6 +3,7 @@ import type { ReadonlyURLSearchParams } from '@/next/navigation'
 const REDIRECT_URL_KEY = 'redirect_url'
 const DEVICE_REDIRECT_KEY = 'dify_post_login_redirect'
 const DEVICE_TTL_MS = 15 * 60 * 1000
+export const DEFAULT_POST_LOGIN_REDIRECT = '/chat/DeepSeek'
 
 const ALLOWED: Record<string, ReadonlySet<string>> = {
   '/device': new Set(['user_code', 'sso_verified']),

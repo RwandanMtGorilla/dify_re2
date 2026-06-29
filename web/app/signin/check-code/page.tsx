@@ -16,7 +16,7 @@ import { consoleQuery } from '@/service/client'
 import { emailLoginWithCode, sendEMailLoginCode } from '@/service/common'
 import { encryptVerificationCode } from '@/utils/encryption'
 import { getBrowserTimezone } from '@/utils/timezone'
-import { resolvePostLoginRedirect } from '../utils/post-login-redirect'
+import { DEFAULT_POST_LOGIN_REDIRECT, resolvePostLoginRedirect } from '../utils/post-login-redirect'
 
 export default function CheckCode() {
   const { t, i18n } = useTranslation()
@@ -63,7 +63,7 @@ export default function CheckCode() {
         else {
           await queryClient.resetQueries({ queryKey: consoleQuery.account.profile.get.key() })
           const redirectUrl = resolvePostLoginRedirect(searchParams)
-          router.replace(redirectUrl || '/')
+          router.replace(redirectUrl || DEFAULT_POST_LOGIN_REDIRECT)
         }
       }
     }

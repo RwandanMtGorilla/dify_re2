@@ -15,6 +15,7 @@ import { consoleQuery } from '@/service/client'
 import { useOneMoreStep } from '@/service/use-common'
 import { timezones } from '@/utils/timezone'
 import Input from '../components/base/input'
+import { DEFAULT_POST_LOGIN_REDIRECT } from './utils/post-login-redirect'
 
 type IState = {
   invitation_code: string
@@ -102,7 +103,7 @@ const OneMoreStep = () => {
         timezone: state.timezone,
       })
       await queryClient.resetQueries({ queryKey: consoleQuery.account.profile.get.key() })
-      router.replace('/')
+      router.replace(DEFAULT_POST_LOGIN_REDIRECT)
     }
     catch (error: unknown) {
       if (hasStatus(error) && error.status === 400)

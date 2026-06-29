@@ -21,7 +21,7 @@ import { consoleQuery } from '@/service/client'
 import { activateMember } from '@/service/common'
 import { useInvitationCheck } from '@/service/use-common'
 import { getBrowserTimezone, timezones } from '@/utils/timezone'
-import { resolvePostLoginRedirect } from '../utils/post-login-redirect'
+import { DEFAULT_POST_LOGIN_REDIRECT, resolvePostLoginRedirect } from '../utils/post-login-redirect'
 
 type LanguageSelectOption = {
   value: Locale
@@ -113,7 +113,7 @@ export default function InviteSettingsPage() {
           await setLocaleOnClient(language!, false)
         await queryClient.resetQueries({ queryKey: consoleQuery.account.profile.get.key() })
         const redirectUrl = resolvePostLoginRedirect(searchParams)
-        router.replace(redirectUrl || '/')
+        router.replace(redirectUrl || DEFAULT_POST_LOGIN_REDIRECT)
       }
     }
     catch {

@@ -41,10 +41,6 @@ vi.mock('@/service/common', async () => {
   }
 })
 
-vi.mock('./utils/post-login-redirect', () => ({
-  resolvePostLoginRedirect: vi.fn(() => null),
-}))
-
 const mockReplace = vi.fn()
 const mockUseQuery = vi.mocked(useQuery)
 const mockUseSuspenseQuery = vi.mocked(useSuspenseQuery)
@@ -107,6 +103,21 @@ describe('NormalForm', () => {
 
       await waitFor(() => {
         expect(mockReplace).toHaveBeenCalledWith('/signin/invite-settings?invite_token=invite-token')
+      })
+    })
+  })
+
+  describe('Default Redirects', () => {
+    it('should send logged-in users to the DeepSeek chat when no redirect URL is provided', async () => {
+      mockUseSearchParams.mockReturnValue(new URLSearchParams())
+      mockUseQuery
+        .mockReturnValueOnce(loggedInQueryResult as unknown as ReturnType<typeof useQuery>)
+        .mockReturnValueOnce(invitationQueryResult as unknown as ReturnType<typeof useQuery>)
+
+      render(<NormalForm />)
+
+      await waitFor(() => {
+        expect(mockReplace).toHaveBeenCalledWith('/chat/DeepSeek')
       })
     })
   })
